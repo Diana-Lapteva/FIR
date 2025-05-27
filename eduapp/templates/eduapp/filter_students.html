@@ -1,0 +1,39 @@
+{% extends 'eduapp/base.html' %}
+{% block content %}
+<form method="get">
+    Пол:
+    <select name="gender">
+        <option value="">Все</option>
+        <option value="М">Мужской</option>
+        <option value="Ж">Женский</option>
+    </select>
+    Курс: <input type="number" name="course">
+    Сортировка:
+    <select name="sort">
+    <option value="" {% if not selected_sort %}selected{% endif %}>Без сортировки</option>
+    <option value="name_asc" {% if selected_sort == 'name_asc' %}selected{% endif %}>ФИО (А-Я)</option>
+    <option value="name_desc" {% if selected_sort == 'name_desc' %}selected{% endif %}>ФИО (Я-А)</option>
+    <option value="average_score_asc" {% if selected_sort == 'average_score_asc' %}selected{% endif %}>Средний балл (по возрастанию)</option>
+    <option value="average_score_desc" {% if selected_sort == 'average_score_desc' %}selected{% endif %}>Средний балл (по убыванию)</option>
+</select>
+    <button type="submit">Применить</button>
+</form>
+
+<table border="1">
+    <tr>
+        <tr><th>ФИО</th><th>Пол</th><th>Email</th><th>Курс</th><th>Средний балл</th></tr>
+    </tr>
+    {% for student in students %}
+    <tr>
+        <td>{{ student.name }}</td>
+        <td>{{ student.gender }}</td>
+        <td>{{ student.course }}</td>
+        <td>{{ student.email }}</td>
+        <td>{{ student.average_score}}</td>
+    </tr>
+    {% empty %}
+    <tr><td colspan="4">Нет студентов</td></tr>
+    {% endfor %}
+</table>
+
+{% endblock %}

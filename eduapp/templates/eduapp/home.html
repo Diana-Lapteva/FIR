@@ -1,0 +1,26 @@
+{% extends 'eduapp/base.html' %}
+{% block content %}
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ user_info.program_name }}</title>
+</head>
+<body>
+    <h1>{{ user_info.program_name }}</h1>
+    <p>{{ user_info.program_description }}</p>
+
+    <h2>О студенте</h2>
+    <img src="{% static user_info.photo %}" alt="Фото" width="150">
+    <p>ФИО: {{ user_info.name }}</p>
+    <p>Email: {{ user_info.email }}</p>
+    <p>Телефон: {{ user_info.phone }}</p>
+
+    <h2>Менеджер программы</h2>
+    <img src="{% static user_info.manager.photo %}" alt="Менеджер" width="150">
+    <p>ФИО: {{ user_info.manager.name }}</p>
+    <p>Email: {{ user_info.manager.email }}</p>
+</body>
+</html>
+{% endblock %}
